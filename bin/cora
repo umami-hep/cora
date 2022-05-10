@@ -3,6 +3,7 @@
 specified in the placeholder."""
 import argparse
 import os
+import pathlib
 import re
 from collections import Counter
 from glob import glob
@@ -214,6 +215,14 @@ def replace_placeholder_with_file_content(
                         f"Placeholder {placeholder} contains more than 2 colons. "
                         "Supported number of colons are 0, 1 and 2."
                     )
+
+                # If the file path specified in the placeholder is not an absolute
+                # path, get the parent directory of the input file and add it to
+                # the path of the replacement_file
+                if not replacement_file.startswith("/"):
+                    input_path = pathlib.Path(os.path.abspath(input_file))
+                    relative_dir = input_path.parent.absolute()
+                    replacement_file = f"{relative_dir}/{replacement_file}"
 
                 # Extract indentation for replacement lines
                 indentation = original_line.split("§§§")[0]

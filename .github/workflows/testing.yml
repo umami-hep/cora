@@ -16,9 +16,6 @@ jobs:
       - run: pytest -vs cora/tests/
   publish:
     name: Publish to PyPI
-    # For now this is an independent job, but we should make this dependent on the
-    # unit tests --> put at end of test pipeline and make it require all the previous 
-    # jobs
     # needs: [linter, pylint, darglint, black]
     needs: [unit_tests]
     # Only run for a tagged commit

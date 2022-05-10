@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Script to replace placeholders in files with the content of the file that is 
+"""Script to replace placeholders in files with the content of the file that is
 specified in the placeholder."""
 import argparse
 import os
@@ -33,9 +33,10 @@ def get_parser():
             "Indentation of the pasted content is the same as the indentation of"
             "the placeholder. \n\n"
             "Examples of placeholders in the processed files: \n\n"
-            "§§§file.py§§§       --> will be replaced by the whole content of file.py\n\n"
-            "§§§file.py:10§§§    --> will be replaced by line 1 to 10 (including 10) of "
-            "file.py \n\n"
+            "§§§file.py§§§       --> will be replaced by the whole content of "
+            "file.py\n\n"
+            "§§§file.py:10§§§    --> will be replaced by line 1 to 10 (including 10) "
+            "of file.py \n\n"
             "§§§file.py:10:20§§§ --> will be replaced by line 10 to 20 (including 1 "
             "and 20) of file.py"
         ),
@@ -112,7 +113,7 @@ def line_contains_placeholder(line):
     Returns
     -------
     bool
-        True if all criteria are satisfied, otherwise false
+        True if all criteria are satisfied, otherwise False
     """
 
     char_counter = Counter(line)
@@ -121,8 +122,11 @@ def line_contains_placeholder(line):
     return False
 
 
+# pylint: disable=R0914,R0912,R0915
 def replace_placeholder_with_file_content(
-    input_file: str, output_file: str = None, no_backup: bool = False
+    input_file: str,
+    output_file: str = None,
+    no_backup: bool = False,
 ):
     """Function to replace placeholders of the form "§§§<filename>:<start>:<end>§§§"
     with the actual content of the file <filename> from line <start> to line <end>.

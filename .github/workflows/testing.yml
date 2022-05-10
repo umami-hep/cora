@@ -20,7 +20,7 @@ jobs:
     # unit tests --> put at end of test pipeline and make it require all the previous 
     # jobs
     # needs: [linter, pylint, darglint, black]
-    # needs: [unit_tests]
+    needs: [unit_tests]
     # Only run for a tagged commit
     if: github.event_name == 'push' #&& startsWith(github.event.ref, 'refs/tags')
     runs-on: ubuntu-latest

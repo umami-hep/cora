@@ -1,8 +1,11 @@
 # librep - LIne Block REPlacement
 
-`librep` is a python-based command-line tools allows to render file placeholders, so 
-it replaces a placeholder of a given syntax with the content of the file that is
-given in the placeholder.
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) 
+[![PyPI version](https://badge.fury.io/py/librep.svg)](https://badge.fury.io/py/librep)
+
+`librep` is a python-based command-line tools allows to render file placeholders. 
+It replaces a placeholder of a given syntax with the content of the file that is
+specified in the placeholder.
 
 The tool is independent of the document type, since it is assumed that the chosen
 syntax does not interfere with the syntax of any (especially markup) language.

@@ -36,9 +36,9 @@ def get_parser():
             "Examples of placeholders in the processed files: \n\n"
             "§§§file.py§§§       --> will be replaced by the whole content of "
             "file.py\n\n"
-            "§§§file.py:10§§§    --> will be replaced by line 1 to 10 (including 10) "
-            "of file.py \n\n"
-            "§§§file.py:10:20§§§ --> will be replaced by line 10 to 20 (including 1 "
+            "§§§file.py:10§§§    --> will be replaced by line 10 (including) to "
+            "bottom of file.py \n\n"
+            "§§§file.py:10:20§§§ --> will be replaced by line 10 to 20 (including 10 "
             "and 20) of file.py"
         ),
         formatter_class=argparse.RawTextHelpFormatter,

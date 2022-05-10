@@ -1,5 +1,6 @@
-# cora
-cora - COde Replacement Api
+# librep
+
+librep - LIne Block REPlacement
 
 This python-based command-line tools allows to render file placeholders in other files.
 The tools is independent of the document type, since it is assumed that the chosen
@@ -18,7 +19,7 @@ Insert a placeholder of the following syntax inside a file (here
 Afterwards, you can render the placeholder by running
 
 ```bash
-$ cora -i "file_with_placeholder.md"
+$ librep -i "file_with_placeholder.md"
 ```
 
 This will replace the original line in the file `file_with_placeholder.md` with 
@@ -54,9 +55,9 @@ Below you can find different versions for inserting different parts of the file
 
 ## Installation
 
-`cora` can simply be installed using `pip install`:
+`librep` can simply be installed using `pip install`:
 
 ```bash
-pip install cora-hep
+pip install librep
 # or
-pip install https://github.com/umami-hep/cora/archive/master.tar.gz
+pip install https://github.com/umami-hep/librep/archive/master.tar.gz

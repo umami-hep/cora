@@ -21,7 +21,7 @@ jobs:
       - name: Install pylint
         run: pip install pylint==2.12.2
       - run: pip install .
-      - run: pylint -j2 ./cora ./bin
+      - run: pylint -j2 ./librep ./bin
   darglint:
     runs-on: ubuntu-latest
     container: python:3.8-slim

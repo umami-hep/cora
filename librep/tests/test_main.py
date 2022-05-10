@@ -13,12 +13,12 @@ class MainTestCase(unittest.TestCase):
     def setUp(self):
         self.dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    def test_cora(self):
+    def test_librep(self):
         """Test simple example file."""
         input_filename = f"{self.dir_path}/fixtures/input.md"
         output_filename = f"{self.dir_path}/fixtures/output.md"
         exp_output_filename = f"{self.dir_path}/fixtures/expected_output.md"
-        command = f"cora -i {input_filename} -o {output_filename}"
+        command = f"librep -i {input_filename} -o {output_filename}"
         print(command)
         self.assertEqual(
             run(command, shell=True, check=True).returncode,

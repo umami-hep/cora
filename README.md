@@ -20,14 +20,12 @@ Afterwards, you can render the placeholder by running
 $ cora -i "file_with_placeholder.md"
 ```
 
-This will replace the original line in the markdown file  with the content of the 
-file `<filename>` from line `<start>` to line `<end>`. 
-The file in the repository will no be changed, but before building the
-docs, a script will create a processed copy of the corresponding markdown file.
+This will replace the original line in the file `file_with_placeholder.md` with 
+the content of the file `<filename>` from line `<start>` to line `<end>`. 
 
 **Using a URL instead of a file from the repository**
 
-If you want to link a file that is not present in the umami repo, but you have a URL
+If you want to link a file that is not present on your machine, but you have a URL
 to that exact file, you can use the following syntax:
 
 ```md

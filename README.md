@@ -1,16 +1,17 @@
-# librep
+# librep - LIne Block REPlacement
 
-librep - LIne Block REPlacement
+`librep` is a python-based command-line tools allows to render file placeholders, so 
+it replaces a placeholder of a given syntax with the content of the file that is
+given in the placeholder.
 
-This python-based command-line tools allows to render file placeholders in other files.
-The tools is independent of the document type, since it is assumed that the chosen
-syntax does not interfere with syntax of any (especially markup) languages.
-The indent of the placeholder is used for the whole inserted code/text block.
+The tool is independent of the document type, since it is assumed that the chosen
+syntax does not interfere with the syntax of any (especially markup) language.
+
+The indentation of the placeholder is used for the whole inserted code/text block.
 
 ## Usage
 
-Insert a placeholder of the following syntax inside a file (here 
-`file_with_placeholder.md`):
+Insert a placeholder of the following syntax inside a file:
 
 ```md
 §§§<filename>:<start>:<end>§§§
@@ -38,6 +39,48 @@ to that exact file, you can use the following syntax:
 
 *Note that this requires `wget` to be installed on your machine*
 
+
+## Example
+
+This file `file_with_placeholders.md`
+````md
+# Heading
+
+Check out this awesome python code!
+```py
+§§§./code.py§§§
+```
+````
+
+Can be processed with `librep` by doing
+
+```bash
+$ librep -i "file_with_placeholder.md"
+```
+
+Which results in
+````md
+# Heading
+
+Check out this awesome python code!
+```py
+def calc_sum(a, b):
+    """Calculates the sum of a+b
+    Parameters
+    ----------
+    a : float, int
+        First number
+    b : float, int
+        Second number
+    Returns
+    -------
+    sum : float
+        Sum of a and b
+    """
+
+    return a + b
+```
+````
 
 ## Examples
 

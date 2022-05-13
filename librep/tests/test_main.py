@@ -15,7 +15,7 @@ class MainTestCase(unittest.TestCase):
 
     def test_librep(self):
         """Test simple example file."""
-        input_filename = f"{self.dir_path}/fixtures/input.md"
+        input_filename = f"{self.dir_path}/fixtures/test_input.md"
         output_filename = f"{self.dir_path}/fixtures/output.md"
         exp_output_filename = f"{self.dir_path}/fixtures/expected_output.md"
         command = f"librep -i {input_filename} -o {output_filename}"

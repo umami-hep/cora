@@ -25,3 +25,20 @@ class MainTestCase(unittest.TestCase):
             0,
         )
         self.assertTrue(filecmp.cmp(output_filename, exp_output_filename))
+
+    def test_librep(self):
+        """Test --ref_dir argument."""
+        input_filename = f"{self.dir_path}/fixtures/test_ref_dir_input.md"
+        output_filename = f"{self.dir_path}/fixtures/output.md"
+        exp_output_filename = (
+            f"{self.dir_path}/fixtures/test_ref_dir_expected_output.md"
+        )
+        command = (
+            f"librep -i {input_filename} -o {output_filename} --ref_dir {os.getcwd()}"
+        )
+        print(command)
+        self.assertEqual(
+            run(command, shell=True, check=True).returncode,
+            0,
+        )
+        self.assertTrue(filecmp.cmp(output_filename, exp_output_filename))

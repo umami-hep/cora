@@ -4,7 +4,7 @@
 import filecmp
 import os
 import unittest
-from subprocess import run
+from subprocess import CalledProcessError, run
 
 
 class MainTestCase(unittest.TestCase):
@@ -26,7 +26,7 @@ class MainTestCase(unittest.TestCase):
         )
         self.assertTrue(filecmp.cmp(output_filename, exp_output_filename))
 
-    def test_librep(self):
+    def test_ref_dir(self):
         """Test --ref_dir argument."""
         input_filename = f"{self.dir_path}/fixtures/test_ref_dir_input.md"
         output_filename = f"{self.dir_path}/fixtures/output.md"
@@ -42,3 +42,14 @@ class MainTestCase(unittest.TestCase):
             0,
         )
         self.assertTrue(filecmp.cmp(output_filename, exp_output_filename))
+
+    def test_filenotfound(self):
+        """Test if error is raised if file is not found."""
+        input_filename = f"{self.dir_path}/fixtures/test_filenotfound_input.md"
+        output_filename = f"{self.dir_path}/fixtures/output.md"
+        command = (
+            f"librep -i {input_filename} -o {output_filename} --ref_dir {os.getcwd()}"
+        )
+        print(command)
+        with self.assertRaises(CalledProcessError):
+            run(command, shell=True, check=True)

@@ -82,6 +82,18 @@ def get_parser():
         type=str,
     )
 
+    parser.add_argument(
+        "-r",
+        "--ref_dir",
+        type=str,
+        required=False,
+        default=None,
+        help=(
+            "Reference directory. If provided, paths that do not start with a slash "
+            "will be relative to this directory."
+        ),
+    )
+
     args = parser.parse_args()
 
     print(args.exclude)
@@ -89,7 +101,7 @@ def get_parser():
     # Translate wildcard and remove excluded files
     args.input = glob(args.input, recursive=True)
     if args.exclude is not None:
-        print(f"\x1b[1;32;40mExcluding the following files: {args.exclude}\x1b[0m")
+        print(f"\x1b[1;32mExcluding the following files: {args.exclude}\x1b[0m")
         args.input = [
             filename for filename in args.input if filename not in args.exclude
         ]
@@ -128,6 +140,7 @@ def replace_placeholder_with_file_content(
     input_file: str,
     output_file: str = None,
     no_backup: bool = False,
+    ref_dir: str = None,
 ):
     """Function to replace placeholders of the form "§§§<filename>:<start>:<end>§§§"
     with the actual content of the file <filename> from line <start> to line <end>.
@@ -143,6 +156,9 @@ def replace_placeholder_with_file_content(
         will be saved. By default None
     no_backup : bool, optional
         Option to overwrite original file without saving a backup file, by default False
+    ref_dir : str, optional
+        Reference directory. If provided, the non-absolute filepaths are relative to
+        this directory. By default None
 
     Raises
     ------
@@ -217,12 +233,13 @@ def replace_placeholder_with_file_content(
                     )
 
                 # If the file path specified in the placeholder is not an absolute
-                # path, get the parent directory of the input file and add it to
-                # the path of the replacement_file
+                # path, and ref_dir is not provided, get the parent directory of the
+                # input file and add it to the path of the replacement_file
                 if not replacement_file.startswith("/"):
-                    input_path = pathlib.Path(os.path.abspath(input_file))
-                    relative_dir = input_path.parent.absolute()
-                    replacement_file = f"{relative_dir}/{replacement_file}"
+                    if ref_dir is None:
+                        input_path = pathlib.Path(os.path.abspath(input_file))
+                        ref_dir = input_path.parent.absolute()
+                    replacement_file = f"{ref_dir}/{replacement_file}"
 
                 # Extract indentation for replacement lines
                 indentation = original_line.split("§§§")[0]
@@ -239,7 +256,7 @@ def replace_placeholder_with_file_content(
                     output_file_content += replacement
                 except FileNotFoundError as err:
                     raise FileNotFoundError(
-                        "\x1b[1;33;40m"
+                        "\x1b[1;31m"
                         f"file: {input_file}, invalid placeholder: {original_line}"
                         "\x1b[0m"
                     ) from err
@@ -263,6 +280,7 @@ def main():
             input_file=input_file,
             output_file=args.output if len(args.input) == 1 else None,
             no_backup=args.no_backup,
+            ref_dir=args.ref_dir,
         )
 
 
